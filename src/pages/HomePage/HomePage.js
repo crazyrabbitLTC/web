@@ -1,26 +1,32 @@
-import { Link, routes } from '@redwoodjs/router'
-
+import { Spinner, Text, Flex } from '@chakra-ui/react'
 import DeployerForm from '../../components/DeployerForm/DeployerForm'
 
 // Get ABI
 import ABI from '../../common/Deployer'
+import { useDeployedAddress } from 'src/common/useDeployedAddress'
 
-// consts
-const mainnetAddress = '0x72237Caa65c3092Be989D997D19C2b6c694ac8b0'
+// UseDapp
+import { useEthers } from '@usedapp/core'
 
 // Component
 const HomePage = () => {
+  const { chainId } = useEthers()
+  const deployedContractAddress = useDeployedAddress(chainId)
+
+  if (!deployedContractAddress) {
+    return (
+      <Flex flexDirection="column" alignItems="center">
+        <Text>
+          Loading...if the spinner does not disapear, try a different network
+        </Text>
+        <Spinner size="xl" />
+      </Flex>
+    )
+  }
+
   return (
     <>
-      <h1>HomePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/HomePage/HomePage.js</code>
-      </p>
-      <DeployerForm contractAddress={mainnetAddress} ABI={ABI} />
-      <p>
-        My default route is named <code>home</code>, link to me with `
-        <Link to={routes.home()}>Home</Link>`
-      </p>
+      <DeployerForm contractAddress={deployedContractAddress} ABI={ABI} />
     </>
   )
 }

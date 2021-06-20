@@ -4,6 +4,15 @@ import { RedwoodApolloProvider } from '@redwoodjs/web/apollo'
 // Chakra
 import { ChakraProvider } from '@chakra-ui/react'
 
+// Theme
+import 'typeface-open-sans'
+import 'typeface-inter'
+import 'typeface-montserrat'
+import 'typeface-source-code-pro'
+import 'typeface-dm-sans'
+
+import theme from './common/theme'
+
 // UseDapp
 import { ChainId, DAppProvider } from '@usedapp/core'
 
@@ -23,7 +32,7 @@ const config = {
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodApolloProvider>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <DAppProvider config={config}>
           <Routes />
         </DAppProvider>

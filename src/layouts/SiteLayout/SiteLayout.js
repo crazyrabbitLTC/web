@@ -1,5 +1,5 @@
-import { Link, routes } from '@redwoodjs/router'
-import { Flex, Text } from '@chakra-ui/react'
+import { routes } from '@redwoodjs/router'
+import { Flex, Text, Link } from '@chakra-ui/react'
 import Web3Connect from '../../components/Web3Connect'
 
 const SiteLayout = ({ children }) => {
